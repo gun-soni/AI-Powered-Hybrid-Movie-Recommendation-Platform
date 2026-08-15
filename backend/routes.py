@@ -4,6 +4,7 @@ from flask import request
 
 from recommender import recommend_movie
 
+
 movie_routes = Blueprint(
     "movie_routes",
     __name__
@@ -18,8 +19,28 @@ def recommend():
 
     data = request.get_json()
 
-    movie = data["movie"]
+    movie = data.get("movie")
 
-    result = recommend_movie(movie)
+    if not movie:
 
-    return jsonify(result)
+        return jsonify({
+            "error": "Movie name is required."
+        }), 400
+
+    try:
+
+        result = recommend_movie(movie)
+
+        if isinstance(result, dict) and "error" in result:
+
+            return jsonify(result), 404
+
+        return jsonify(result)
+
+    except Exception as error:
+
+        print("Recommendation Error:", error)
+
+        return jsonify({
+            "error": "Internal server error."
+        }), 500

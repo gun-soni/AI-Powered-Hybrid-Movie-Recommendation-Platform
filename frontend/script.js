@@ -1,6 +1,8 @@
-const button = document.getElementById("searchBtn");
+const button =
+    document.getElementById("searchBtn");
 
-const input = document.getElementById("movieName");
+const input =
+    document.getElementById("movieName");
 
 const recommendationDiv =
     document.getElementById("recommendations");
@@ -12,38 +14,52 @@ const errorDiv =
     document.getElementById("error");
 
 
-button.addEventListener("click", getRecommendations);
+button.addEventListener(
+    "click",
+    getRecommendations
+);
 
 
-input.addEventListener("keydown", function (event) {
+input.addEventListener(
+    "keydown",
+    function (event) {
 
-    if (event.key === "Enter") {
+        if (event.key === "Enter") {
 
-        getRecommendations();
+            getRecommendations();
+
+        }
 
     }
-
-});
+);
 
 
 async function getRecommendations() {
 
-    const movie = input.value.trim();
+    const movieName =
+        input.value.trim();
+
 
     recommendationDiv.innerHTML = "";
 
     errorDiv.innerHTML = "";
 
-    if (!movie) {
+
+    if (!movieName) {
 
         errorDiv.innerText =
             "Please enter a movie name.";
 
         return;
-
     }
 
+
     loading.style.display = "block";
+
+
+    button.disabled = true;
+
+    button.innerText = "Searching...";
 
 
     try {
@@ -58,61 +74,129 @@ async function getRecommendations() {
                 },
 
                 body: JSON.stringify({
-                    movie: movie
+                    movie: movieName
                 })
             }
         );
 
 
-        if (!response.ok) {
-
-            throw new Error(
-                "Movie could not be found."
-            );
-
-        }
-
-
-        const recommendations =
+        const data =
             await response.json();
 
 
-        for (const movie of recommendations) {
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Unable to get recommendations."
+            );
+        }
+
+
+        if (!Array.isArray(data) ||
+            data.length === 0) {
+
+            throw new Error(
+                "No recommendations found."
+            );
+        }
+
+
+        for (const movie of data) {
+
+            const poster = movie.poster || "assets/default-poster.jpg";
+
+
+            const overview =
+                movie.overview ||
+                "No overview available.";
+
+
+            const tmdbRating =
+                movie.tmdb_rating !== null &&
+                movie.tmdb_rating !== undefined
+                    ? movie.tmdb_rating
+                    : "N/A";
+
 
             recommendationDiv.innerHTML += `
 
                 <div class="movie-card">
 
-                    <h3>${movie.title}</h3>
+                    <img
+                        src="${poster}"
+                        alt="${movie.title}"
+                        loading="lazy"
+                        onerror="this.onerror=null; this.src='assets/default-poster.jpg';"
+                    >
 
-                    <p>
-                        ⭐ ${movie.rating}
-                    </p>
+                    <div class="movie-info">
 
-                    <p>
-                        📅 ${movie.release_date}
-                    </p>
+                        <h3>
+                            ${movie.title}
+                        </h3>
+
+                        <p class="rating">
+                            ⭐ ${movie.rating}
+                        </p>
+
+                        <p>
+                            TMDB:
+                            ${tmdbRating}
+                        </p>
+
+                        <p>
+                            📅
+                            ${
+                                movie.release_date ||
+                                "Unknown"
+                            }
+                        </p>
+
+                        <p class="overview">
+                            ${overview}
+                        </p>
+
+                    </div>
 
                 </div>
 
             `;
-
         }
 
+
+        document
+            .getElementById(
+                "recommendationSection"
+            )
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
     }
+
 
     catch (error) {
 
-        console.error(error);
+        console.error(
+            "Recommendation Error:",
+            error
+        );
+
 
         errorDiv.innerText =
-            "Unable to get recommendations.";
+            error.message;
 
     }
+
 
     finally {
 
         loading.style.display = "none";
+
+        button.disabled = false;
+
+        button.innerText = "Recommend";
 
     }
 

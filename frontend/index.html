@@ -3,7 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>AI Movie Recommendation Platform</title>
 
@@ -12,36 +16,108 @@
 
 <body>
 
-    <header>
-        <h1>NETFLIX</h1>
-        <p>AI-Powered Hybrid Movie Recommendation Platform</p>
-    </header>
+    <!-- Navigation -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            NETFLIX
+        </div>
+
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#recommendations">Recommendations</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                AI-Powered Movie Recommendations
+            </h1>
+
+            <p>
+                Discover movies you'll love using
+                machine learning, semantic search
+                and AI.
+            </p>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="movieName"
+                    placeholder="Search for a movie..."
+                    autocomplete="off"
+                >
+
+                <button id="searchBtn">
+                    Recommend
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Loading -->
+
+    <div id="loading">
+        Finding the best movies for you...
+    </div>
+
+
+    <!-- Error -->
+
+    <div id="error"></div>
+
+
+    <!-- Recommendations -->
 
     <main>
 
-        <div class="search-box">
+        <section
+            id="recommendationSection"
+            class="recommendation-section"
+        >
 
-            <input
-                type="text"
-                id="movieName"
-                placeholder="Enter movie name..."
-            >
+            <div class="section-header">
 
-            <button id="searchBtn">
-                Recommend
-            </button>
+                <h2>
+                    Recommended For You
+                </h2>
 
-        </div>
+            </div>
 
-        <div id="loading">
-            Getting recommendations...
-        </div>
+            <div id="recommendations"></div>
 
-        <div id="error"></div>
-
-        <section id="recommendations"></section>
+        </section>
 
     </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            AI-Powered Hybrid Movie Recommendation Platform
+        </p>
+
+        <p>
+            Machine Learning • NLP • LLM • TMDB
+        </p>
+
+    </footer>
+
 
     <script src="script.js"></script>
 
