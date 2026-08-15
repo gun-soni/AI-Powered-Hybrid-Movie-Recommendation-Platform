@@ -1,12 +1,10 @@
-from loaders.model_loader import (
-    movies,
-    svd_model
-)
+from loaders import model_loader
 
 
 def hybrid_score(candidate_movies,
                  semantic_scores,
                  user_id=1):
+    svd_model = model_loader.svd_model
 
     collab_scores = []
 

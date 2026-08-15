@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Movie Recommendation Platform</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>NETFLIX</h1>
+        <p>AI-Powered Hybrid Movie Recommendation Platform</p>
+    </header>
+
+    <main>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="movieName"
+                placeholder="Enter movie name..."
+            >
+
+            <button id="searchBtn">
+                Recommend
+            </button>
+
+        </div>
+
+        <div id="loading">
+            Getting recommendations...
+        </div>
+
+        <div id="error"></div>
+
+        <section id="recommendations"></section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

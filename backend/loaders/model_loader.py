@@ -1,8 +1,10 @@
 import pickle
+
 import numpy as np
+
 import faiss
 
-# Global Variables
+
 movies = None
 embeddings = None
 index = None
@@ -16,7 +18,7 @@ def load_models():
     global index
     global svd_model
 
-    print("Loading Models...")
+    print("Loading models...")
 
     movies = pickle.load(
         open("../models/movie_metadata.pkl", "rb")
@@ -34,4 +36,4 @@ def load_models():
         open("../models/svd_model.pkl", "rb")
     )
 
-    print("Models Loaded Successfully")
+    print("All models loaded successfully.")
