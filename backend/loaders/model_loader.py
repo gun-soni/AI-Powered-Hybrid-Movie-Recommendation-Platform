@@ -1,14 +1,15 @@
 import pickle
-
 import numpy as np
-
 import faiss
+
+from sentence_transformers import SentenceTransformer
 
 
 movies = None
 embeddings = None
 index = None
 svd_model = None
+semantic_model = None
 
 
 def load_models():
@@ -17,6 +18,7 @@ def load_models():
     global embeddings
     global index
     global svd_model
+    global semantic_model
 
     print("Loading models...")
 
@@ -34,6 +36,12 @@ def load_models():
 
     svd_model = pickle.load(
         open("../models/svd_model.pkl", "rb")
+    )
+
+    print("Loading semantic model...")
+
+    semantic_model = SentenceTransformer(
+        "sentence-transformers/all-MiniLM-L6-v2"
     )
 
     print("All models loaded successfully.")
