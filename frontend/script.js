@@ -79,7 +79,7 @@ async function getRecommendations() {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/recommend",
+                "/recommend",
                 {
                     method: "POST",
 
@@ -465,7 +465,7 @@ async function rateMovie(
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/rate",
+                "/rate",
                 {
                     method: "POST",
 
@@ -535,7 +535,7 @@ async function addToWatchlist(
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/watchlist",
+                "/watchlist",
                 {
                     method: "POST",
 
@@ -615,7 +615,7 @@ async function loadWatchlist() {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/watchlist"
+                "/watchlist"
             );
 
 
@@ -766,7 +766,7 @@ async function deleteWatchlistItem(
 
         const response =
             await fetch(
-                `http://127.0.0.1:5000/watchlist/${watchlistId}`,
+                `/watchlist/${watchlistId}`,
                 {
                     method: "DELETE"
                 }
@@ -831,7 +831,7 @@ async function loadHistory() {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/history"
+                "/history"
             );
 
 
@@ -936,7 +936,7 @@ async function deleteHistoryItem(
 
         const response =
             await fetch(
-                `http://127.0.0.1:5000/history/${historyId}`,
+                `/history/${historyId}`,
                 {
                     method: "DELETE"
                 }
