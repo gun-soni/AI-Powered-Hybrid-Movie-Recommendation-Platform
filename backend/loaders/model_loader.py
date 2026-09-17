@@ -32,22 +32,34 @@ def load_models():
         open(MODEL_DIR / "movie_metadata.pkl", "rb")
     )
 
+    print("Movie metadata loaded.", flush=True)
+
     embeddings = np.load(
         MODEL_DIR / "movie_embeddings.npy"
     )
+
+    print("Embeddings loaded.", flush=True)
+
 
     index = faiss.read_index(
         str(MODEL_DIR / "faiss.index")
     )
 
+    print("FAISS index loaded.", flush=True)
+
     svd_model = pickle.load(
         open(MODEL_DIR / "svd_model.pkl", "rb")
     )
 
-    print("Loading semantic model...")
+    print("SVD model loaded.", flush=True)
+
+    print("Loading semantic model...", flush=True)
+
 
     semantic_model = SentenceTransformer(
-        "sentence-transformers/all-MiniLM-L6-v2"
+        "sentence-transformers/all-MiniLM-L6-v2",
+        device="cpu"
+
     )
 
     print("All models loaded successfully.")
