@@ -1,5 +1,4 @@
 import os
-import threading
 
 from flask import (
     Flask,
@@ -88,11 +87,7 @@ def serve_frontend_files(path):
 # LOAD MODELS
 # =========================================
 
-threading.Thread(
-    target=load_models,
-    daemon=True
-).start()
-
+load_models
 
 # =========================================
 # LOCAL DEVELOPMENT
