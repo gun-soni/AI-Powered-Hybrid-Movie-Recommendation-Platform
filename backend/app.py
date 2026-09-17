@@ -1,4 +1,5 @@
 import os
+import threading
 
 from flask import (
     Flask,
@@ -87,7 +88,10 @@ def serve_frontend_files(path):
 # LOAD MODELS
 # =========================================
 
-load_models()
+threading.Thread(
+    target=load_models,
+    daemon=True
+).start()
 
 
 # =========================================
@@ -98,6 +102,6 @@ if __name__ == "__main__":
 
     app.run(
         host="0.0.0.0",
-        debug=True,
+        debug=False,
         port=int(os.environ.get("PORT", 8000)),
     )
