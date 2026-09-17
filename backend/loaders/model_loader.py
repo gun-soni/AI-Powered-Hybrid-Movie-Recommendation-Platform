@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
 import faiss
+from pathlib import Path
 
 from sentence_transformers import SentenceTransformer
 
@@ -10,6 +11,11 @@ embeddings = None
 index = None
 svd_model = None
 semantic_model = None
+
+
+# Get project root directory
+BASE_DIR = Path(__file__).resolve().parents[2]
+MODEL_DIR = BASE_DIR / "models"
 
 
 def load_models():
@@ -23,19 +29,19 @@ def load_models():
     print("Loading models...")
 
     movies = pickle.load(
-        open("../models/movie_metadata.pkl", "rb")
+        open(MODEL_DIR / "movie_metadata.pkl", "rb")
     )
 
     embeddings = np.load(
-        "../models/movie_embeddings.npy"
+        MODEL_DIR / "movie_embeddings.npy"
     )
 
     index = faiss.read_index(
-        "../models/faiss.index"
+        str(MODEL_DIR / "faiss.index")
     )
 
     svd_model = pickle.load(
-        open("../models/svd_model.pkl", "rb")
+        open(MODEL_DIR / "svd_model.pkl", "rb")
     )
 
     print("Loading semantic model...")
