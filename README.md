@@ -1680,13 +1680,13 @@ cd <project-folder>
 Create a virtual environment:
 
 ```bash
-python -m venv venv
+conda create -p venv python==3.12
 ```
 
 Activate it on Windows:
 
 ```bash
-venv\Scripts\activate
+conda activate venv/
 ```
 
 ---
@@ -1726,7 +1726,7 @@ Do not commit `.env` to GitHub.
 Activate the virtual environment:
 
 ```bash
-venv\Scripts\activate
+conda activate venv/
 ```
 
 Start Flask:
@@ -1738,7 +1738,7 @@ python backend/app.py
 The API runs on:
 
 ```text
-http://127.0.0.1:5000
+http://127.0.0.1:8000
 ```
 
 ---
@@ -1754,7 +1754,7 @@ The frontend communicates with the Flask backend:
 ```text
 Frontend
    ↓
-http://127.0.0.1:5000
+http://127.0.0.1:8000
    ↓
 Flask API
 ```
